@@ -1,0 +1,9 @@
+.profile__buton-add {
+  width: 150px;
+  height: 50px;
+  background-color: black;
+  background-image: url("../../../images/cross.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  border: solid 2px white;
+}
