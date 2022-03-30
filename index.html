@@ -7,24 +7,74 @@
     <link rel="stylesheet" href="./pages/index.css">
     <title>Mesto</title>
 </head>
+
 <body class="page"> 
   <header class="header">
     <div class="header__container">
-      <a href="#"><img src="./images/logo.svg" class="header__logo" alt="Mesto"> </a>
+      <a href="#"><img src="./images/logo.svg" class="header__logo" alt="Мэсто"> </a>
     </div>
   </header>
   <main class="content">
+
     <section class="profile">
-    <div class="profile__avatar"></div>
+    <img class="profile__avatar" src="./images/kusto.jpg" alt="Кусто">
     <div class="profile__info">
       <h1 class="profile__title">Жак-Ив Кусто</h1>
+      <button class="profile__button-edit"></button>
       <p class="profile__text">Исследователь океана</p>
-      <button class="profile__buton-edit"></button>
-   </div>
-   <button class="profile__buton-add"></button>
+    </div>
+   <button class="profile__button-add"></button>
+  </section>
 
-    </section>
+   <section class="еlements">
+    <ul class="еlements__container">
+      <li class="еlement">
+        <img class="еlement__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="">
+        <div class="еlement__item">
+        <h2 class="еlement__title">Карачаевск</h2>
+        <button class="еlement__like"></button>
+      </div>
+      <li class="еlement">
+        <img class="еlement__image" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="">
+        <div class="еlement__item">
+        <h2 class="еlement__title">Гора Эльбрус</h2>
+        <button class="еlement__like"></button>
+      </div>
+      </li>
+      <li class="еlement">
+        <img class="еlement__image" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="">
+        <div class="еlement__item">
+        <h2 class="еlement__title">Домбай</h2>
+        <button class="еlement__like"></button>
+      </div>
+      </li>
+      <li class="еlement">
+        <img class="еlement__image" src="./images/Sochi.jpeg" alt="">
+        <div class="еlement__item">
+        <h2 class="еlement__title">Сочи</h2>
+        <button class="еlement__like"></button>
+      </div>
+      </li>
+      <li class="еlement">
+        <img class="еlement__image" src="./images/Anapa.jpeg"alt="">
+        <div class="еlement__item">
+        <h2 class="еlement__title">Анапа</h2>
+        <button class="еlement__like"></button>
+      </div>
+      </li>
+      <li class="еlement">
+        <img class="еlement__image" src="./images/Krym.jpeg" alt="">
+        <div class="еlement__item">
+        <h2 class="еlement__title">Крым</h2> 
+        <button class="еlement__like"></button> 
+      </div>
+        
+      </li>
+    </ul>
+  </section>
   </main>
-  <footer></footer>
+  <footer class="footer">
+<p class="footer__copyright">© 2022 Mesto Russia</p>
+  </footer>
 </body>
 </html>
