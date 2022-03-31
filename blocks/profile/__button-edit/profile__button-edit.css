@@ -2,7 +2,7 @@
   width: 24px;
   height: 24px;
   align-self: center;
-  background-color: black;
+  background-color: transparent;
   background-image: url("../../../images/pen.png");
   background-position: center;
   background-repeat: no-repeat;
@@ -10,4 +10,15 @@
   padding: 3px 0 0 0;
   line-height: 0;
   cursor: pointer;
+}
+
+.profile__button-edit:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__edit-button {
+    width: 18px;
+    height: 18px;
+  }
 }
