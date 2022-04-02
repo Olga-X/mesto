@@ -7,16 +7,10 @@
   align-items: center;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 768px) {
   .profile {
-    padding: 40px 19px 0 19px;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .profile {
-    min-height: 286px;
-    padding: 42px 19px 0 19px;
+    min-height: 282px;
+    padding: 42px 19px 30px 19px;
     flex-direction: column;
   }
 }

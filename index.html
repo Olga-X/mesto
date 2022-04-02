@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./pages/index.css">
-    <title>Mesto</title>
+    <title>Mesto Russia</title>
 </head>
 <body class="page"> 
   <header class="header">
     <div class="header__container">
-      <img src="./images/logo.svg" class="header__logo" alt="Место">
+      <img src="./images/logo.svg" class="header__logo" alt="Место Россия">
     </div>
   </header>
   <main class="content">
@@ -49,11 +49,11 @@
         <img class="еlement__image" src="./images/Sochi.jpeg" alt="Сочи">
         <div class="еlement__item">
         <h2 class="еlement__title">Сочи</h2>
-        <button class="еlement__like"type="button"></button>
+        <button class="еlement__like" type="button"></button>
       </div>
       </li>
       <li class="еlement">
-        <img class="еlement__image" src="./images/Anapa.jpeg"alt="Анапа">
+        <img class="еlement__image" src="./images/Anapa.jpeg" alt="Анапа">
         <div class="еlement__item">
         <h2 class="еlement__title">Анапа</h2>
         <button class="еlement__like" type="button"></button>
@@ -72,19 +72,17 @@
   <footer class="footer">
     <p class="footer__copyright">© 2022 Mesto Russia</p>
   </footer>
-
   <div class="popup">
     <div class="popup__container">
       <button class="popup__close" type="button"> <img src="./images/close-icon.svg" alt="Закрыть" class="popup__close-image"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
-      
       <form action="#" class="form" name="form">
-        <input type="text" class="form__input form__input_type_name" name="name" placeholder="Имя">
-        <input type="text" class="form__input form__input_type_about" name="about-me" placeholder="О себе">
+        <input type="text" placeholder="Имя" class="form__input form__input_name">
+        <input type="text" placeholder="О себе" class="form__input form__input_about">
         <button type="submit" class="form__submit">Сохранить</button>
       </form>
     </div>
   </div>
-  <script src="./pages/script.js "></script>
+  <script src="./pages/index.js "></script>
 </body>
 </html>

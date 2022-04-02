@@ -4,7 +4,7 @@
   gap: 16px 18px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .profile__info {
     text-align: center;
     margin-bottom: 34px;
