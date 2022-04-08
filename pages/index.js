@@ -25,7 +25,7 @@ modalEditBtn.addEventListener('click', function() {
   profileNameInput.value = profileName.textContent;
   profileAboutInput.value = profileDescription.textContent;
 
-  toggleModalWindow(modalWindow);
+  toggleModalWindow();
 })
 
 // Обработчик «отправки» формы для изменения профиля
@@ -36,9 +36,8 @@ function profileEditSubmit(evt) {
   profileName.textContent = profileNameInput.value;
   profileDescription.textContent = profileAboutInput.value;
 
-  toggleModalWindow(modalWindow);
+  toggleModalWindow();
 
-  profileForm.reset();
 }
 // Прикрепляем обработчик к форме:он будет следить за событием “submit” - «отправка»
 
