@@ -4,8 +4,8 @@ let modalEditBtn = document.querySelector('.profile__button-edit');
 let profileName = document.querySelector('.profile__title');
 let profileDescription = document.querySelector('.profile__text');
 let profileForm = modalWindow.querySelector('.form');
-let profileNameInput = modalWindow.querySelector('.form__input_name');
-let profileAboutInput = modalWindow.querySelector('.form__input_about');
+let profileNameInput = modalWindow.querySelector('.form__input_type_name');
+let profileAboutInput = modalWindow.querySelector('.form__input_type_about');
 
 
 // Открыть-Закрыть
