@@ -28,7 +28,6 @@ const imageReviewDesc = imagePopup.querySelector('.popup__description');
 const cardsContainer = document.querySelector('.еlements__container');
 const cardTemplate= document.querySelector('#card-template');
 
-
 const initialCards = [
   {
     name: 'Геленджик',
@@ -56,7 +55,7 @@ const initialCards = [
   }
 ]; 
 
-//Добавляем карточки в html
+// Добавляем карточки в html
 function render(){
   const cards=initialCards.map(createCard);
   cardsContainer.prepend(...cards);
@@ -97,7 +96,7 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
-//Функция закрытия
+// Функция закрытия
 function closePopup(popup) {
   popup.classList.remove('popup_opened'); 
 }
