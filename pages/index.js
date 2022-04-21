@@ -1,27 +1,31 @@
-const modalWindow = document.querySelector('.popup');
-const modalCloseBtn = modalWindow.querySelector('.popup__close');
-const modalEditBtn = document.querySelector('.profile__button-edit');
+
+// Модальные окна попапы
+const profilePopup = document.querySelector('.popup_form_edit-profile');
+const cardPopup = document.querySelector('.popup_form_add-card');
+const imagePopup = document.querySelector('.popup_review-image');
+
+// Форма добавления профиля
+const profileEditBtn = document.querySelector('.profile__button-edit');
+const profileCloseBtn = profilePopup.querySelector('.popup__close');
 const profileName = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__text');
-const profileForm = modalWindow.querySelector('.form');
-const profileNameInput = modalWindow.querySelector('.form__input_type_name');
-const profileAboutInput = modalWindow.querySelector('.form__input_type_about');
+const profileForm = profilePopup.querySelector('.form');
+const profileNameInput = profilePopup.querySelector('.form__input_type_name');
+const profileAboutInput = profilePopup.querySelector('.form__input_type_about');
 
-// Окно добавления карточки
-const btnAddNewCard = document.querySelector('.profile__button-add');
-const popupAddCard = document.querySelector('.popup_form_add-card');
-const popupAddCardName = popupAddCard.querySelector('.form__input_type_title');
-const popupAddCardLink = popupAddCard.querySelector('.form__input_type_link');
-const popupAddCardClose = popupAddCard.querySelector('.popup__close');
-const addCardForm = popupAddCard.querySelector('.form');
+// Форма добавления карточки
+const cardAddBtn = document.querySelector('.profile__button-add');
+const cardAddName = cardPopup.querySelector('.form__input_type_title');
+const cardAddLink = cardPopup.querySelector('.form__input_type_link');
+const cardCloseBtn = cardPopup.querySelector('.popup__close');
+const cardAddForm = cardPopup.querySelector('.form');
 
-// Окно подробного просмотра картинки
-const popupReview = document.querySelector('.popup_review-image');
-const popupReviewClose = popupReview.querySelector('.popup__close');
-const popupReviewImage = popupReview.querySelector('.popup__image');
-const popupReviewDesc = popupReview.querySelector('.popup__description');
+// Форма подробного просмотра картинки
+const imageCloseBtn = imagePopup.querySelector('.popup__close');
+const imageReview = imagePopup.querySelector('.popup__image');
+const imageReviewDesc = imagePopup.querySelector('.popup__description');
 
-const elementList = document.querySelector('.еlements__container');
+const cardsContainer = document.querySelector('.еlements__container');
 const cardTemplate= document.querySelector('#card-template');
 
 
@@ -50,12 +54,12 @@ const initialCards = [
     name: 'Сукко',
     link: 'https://thumb.cloud.mail.ru/weblink/thumb/xw1/VcEe/1pKAcJ1fK'
   }
- 
 ]; 
 
+//Добавляем карточки в html
 function render(){
   const cards=initialCards.map(createCard);
-  elementList.prepend(...cards);
+  cardsContainer.prepend(...cards);
 }
 
 function createCard(cardСontent) {
@@ -88,45 +92,49 @@ cardElementImage.addEventListener('click', () => {
   return cardElement;
 }
 
-// Функция открытия-закрытия профиля
-function toggleModalWindow() {
-  modalWindow.classList.toggle('popup_opened');
+// Функция открытия
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
 }
 
-// Функция открытия-закрытия кнопкой добавления карточки
-function toggleAddCard() {
-  popupAddCard.classList.toggle('popup_opened');
+//Функция закрытия
+function closePopup(popup) {
+  popup.classList.remove('popup_opened'); 
 }
 
-btnAddNewCard.addEventListener('click', toggleAddCard);
+// Открывает-закрывает кнопка добавления карточки
+  cardAddBtn.addEventListener('click', () => {
+    openPopup(cardPopup);
+});
 
- // Функция открытия-закрытия картинки
- function togglePopupReview() {
-  popupReview.classList.toggle('popup_opened');
-}
+  cardCloseBtn.addEventListener('click', () => {
+  closePopup(cardPopup);
+});
 
-// Функция открытия окна подробного просмотра нажатием на картинку
+// Функция открытия-закрытия окна подробного просмотра нажатием на картинку
 function handleShowImage(popupShownContent) {
-  togglePopupReview();
+  openPopup(imagePopup);
 
-  popupReviewDesc.textContent = popupShownContent.name;
-  popupReviewImage.alt = popupShownContent.name;
-  popupReviewImage.src = popupShownContent.link;
+  imageReviewDesc.textContent = popupShownContent.name;
+  imageReview.alt = popupShownContent.name;
+  imageReview.src = popupShownContent.link;
 }
 
-// Закрыть по клику на крестик
-modalCloseBtn.addEventListener('click', toggleModalWindow);
-popupAddCardClose.addEventListener('click', toggleAddCard);
-popupReviewClose.addEventListener('click', togglePopupReview);
+imageCloseBtn.addEventListener('click', () => {
+  closePopup(imagePopup);
+});
 
-// Открыть редактировать по клик
-modalEditBtn.addEventListener('click', function() {
+// Открывает-закрывает профиль
+profileEditBtn.addEventListener('click', () => {
+  openPopup(profilePopup);
 
   profileNameInput.value = profileName.textContent;
   profileAboutInput.value = profileDescription.textContent;
+});
 
-  toggleModalWindow();
-})
+profileCloseBtn.addEventListener('click', () => {
+  closePopup(profilePopup);
+});
 
 // Обработчик «отправки» формы для изменения профиля
 function profileEditSubmit(evt) {
@@ -135,30 +143,32 @@ function profileEditSubmit(evt) {
   profileName.textContent = profileNameInput.value;
   profileDescription.textContent = profileAboutInput.value;
 
-  toggleModalWindow();
+  closePopup(profilePopup);
 }
 
-// Обработчик «отправки» формы добавления карточки
-popupAddCard.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-
-  addInArr({
-    name: popupAddCardName.value,
-    link: popupAddCardLink.value
-  }, elementList, true);
-
-  toggleAddCard();
-});
-
-// Прикрепляем обработчик к форме он будет следить за событием “submit” - «отправка»
+// Обработчик к форме он будет следить за событием “submit” - «отправка»
 profileForm.addEventListener('submit', profileEditSubmit);
 
-// Функция добавление новой карточки в начало списка
-function addInArr(cardСontent, popupAddCard, newItem) {
-  const item = createCard(cardСontent);
+// Обработчик «отправки» формы добавления карточки
+cardAddForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
 
-  if(newItem) {
-    popupAddCard.prepend(item);
+  addCardTop({
+    name: cardAddName.value,
+    link: cardAddLink.value
+  }, cardsContainer, true);
+
+  evt.target.reset();
+
+  closePopup(cardPopup);
+});
+
+// Функция добавление новой карточки в начало списка
+function addCardTop(cardСontent, cardPopup, newCard) {
+  const card = createCard(cardСontent);
+
+  if(newCard) {
+    cardPopup.prepend(card);
   }
 }
 
