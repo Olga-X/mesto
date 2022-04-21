@@ -1,4 +1,3 @@
-
 // Модальные окна попапы
 const profilePopup = document.querySelector('.popup_form_edit-profile');
 const cardPopup = document.querySelector('.popup_form_add-card');
@@ -71,7 +70,7 @@ function createCard(cardСontent) {
 // Cвязи между объектами массива
   cardElementImage.src = cardСontent.link;
   cardElementName.textContent = cardСontent.name;
-  cardElementName.alt = cardСontent.name;
+  cardElementImage.alt = cardСontent.name;
 
 // Функция лайка 
   cardElementLike.addEventListener('click', (evt) => {
@@ -112,11 +111,11 @@ function closePopup(popup) {
 
 // Функция открытия-закрытия окна подробного просмотра нажатием на картинку
 function handleShowImage(popupShownContent) {
-  openPopup(imagePopup);
-
+  
   imageReviewDesc.textContent = popupShownContent.name;
   imageReview.alt = popupShownContent.name;
   imageReview.src = popupShownContent.link;
+  openPopup(imagePopup);
 }
 
 imageCloseBtn.addEventListener('click', () => {
@@ -125,10 +124,10 @@ imageCloseBtn.addEventListener('click', () => {
 
 // Открывает-закрывает профиль
 profileEditBtn.addEventListener('click', () => {
-  openPopup(profilePopup);
 
   profileNameInput.value = profileName.textContent;
   profileAboutInput.value = profileDescription.textContent;
+  openPopup(profilePopup);
 });
 
 profileCloseBtn.addEventListener('click', () => {
@@ -141,7 +140,6 @@ function profileEditSubmit(evt) {
 
   profileName.textContent = profileNameInput.value;
   profileDescription.textContent = profileAboutInput.value;
-
   closePopup(profilePopup);
 }
 
@@ -157,18 +155,14 @@ cardAddForm.addEventListener('submit', (evt) => {
     link: cardAddLink.value
   }, cardsContainer, true);
 
-  evt.target.reset();
-
   closePopup(cardPopup);
+  cardAddForm.reset();
 });
 
 // Функция добавление новой карточки в начало списка
-function addCardTop(cardСontent, cardPopup, newCard) {
+function addCardTop(cardСontent, cardPopup) {
   const card = createCard(cardСontent);
-
-  if(newCard) {
     cardPopup.prepend(card);
-  }
 }
 
 render();
