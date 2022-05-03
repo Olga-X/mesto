@@ -12,6 +12,8 @@ const profileForm = profilePopup.querySelector('.form');
 const profileNameInput = profilePopup.querySelector('.form__input_type_name');
 const profileAboutInput = profilePopup.querySelector('.form__input_type_about');
 
+
+
 // Форма добавления карточки
 const cardAddBtn = document.querySelector('.profile__button-add');
 const cardAddName = cardPopup.querySelector('.form__input_type_title');
@@ -26,6 +28,8 @@ const imageReviewDesc = imagePopup.querySelector('.popup__description');
 
 const cardsContainer = document.querySelector('.еlements__container');
 const cardTemplate= document.querySelector('#card-template');
+
+const overlays = Array.from(document.querySelectorAll(".popup"));
 
 const initialCards = [
   {
@@ -93,11 +97,13 @@ cardElementImage.addEventListener('click', () => {
 // Функция открытия
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener("keydown", closeByEsc);
 }
 
 // Функция закрытия
 function closePopup(popup) {
   popup.classList.remove('popup_opened'); 
+  document.removeEventListener("keydown", closeByEsc);
 }
 
 // Открывает-закрывает кнопка добавления карточки
@@ -124,15 +130,36 @@ imageCloseBtn.addEventListener('click', () => {
 
 // Открывает-закрывает профиль
 profileEditBtn.addEventListener('click', () => {
-
   profileNameInput.value = profileName.textContent;
   profileAboutInput.value = profileDescription.textContent;
+  
+  disableButtonOnOpening(profileForm, config);
+  hideInputError(profileForm, profileNameInput, config);
+  hideInputError(profileForm, profileAboutInput, config);
   openPopup(profilePopup);
 });
 
 profileCloseBtn.addEventListener('click', () => {
   closePopup(profilePopup);
 });
+
+// Закрытие кнопкой esc
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
+      closePopup(document.querySelector(".popup_opened"));
+  }
+}
+
+// Закрытие кликом оверлей
+
+overlays.forEach((overlay) => {
+  overlay.addEventListener("click", (evt) => {
+      if (evt.target === evt.currentTarget) {
+          closePopup(document.querySelector(".popup_opened"));
+      }
+  });
+});
+
 
 // Обработчик «отправки» формы для изменения профиля
 function profileEditSubmit(evt) {
@@ -145,6 +172,7 @@ function profileEditSubmit(evt) {
 
 // Обработчик к форме он будет следить за событием “submit” - «отправка»
 profileForm.addEventListener('submit', profileEditSubmit);
+
 
 // Обработчик «отправки» формы добавления карточки
 cardAddForm.addEventListener('submit', (evt) => {

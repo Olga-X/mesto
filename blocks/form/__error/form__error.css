@@ -1,0 +1,30 @@
+.form__error {
+  font-family: "Inter", "Arial", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.25;
+  color: #ff0000;
+  display: block;
+  visibility: hidden;
+  position: absolute;
+  text-align: start;
+  top: 148px;
+ 
+}
+
+@media screen and (max-width: 420px) {
+  .form__error {
+    top: 156px;
+ }
+}
+
+.form__error:last-of-type {
+  top: 209px;
+}
+
+@media screen and (max-width: 420px) {
+  .form__error:last-of-type {
+    top: 210px;
+ }
+}

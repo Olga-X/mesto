@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./pages/index.css">
-    <script defer src="./pages/index.js "></script>
+    <script defer src="./pages/index.js"></script>
+    <script defer src="./pages/validate.js"></script>
     <title>Mesto Russia</title>
 </head>
 <body class="page"> 
@@ -29,13 +30,17 @@
   <footer class="footer">
     <p class="footer__copyright">© 2022 Ольга Х. Mesto Russia </p>
   </footer>
+
+
   <div class="popup popup_form_edit-profile">
     <div class="popup__container">
       <button class="popup__close" type="button"> <img src="./images/close-icon.svg" alt="Закрыть" class="popup__close-image"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
-      <form action="#" class="form" name="form">
-        <input type="text" name="name" placeholder="Имя" class="form__input form__input_type_name">
-        <input type="text" name="about-me" placeholder="О себе" class="form__input form__input_type_about">
+      <form action="#" class="form" name="formProfile" novalidate>
+        <input type="text" name="nameProfile" id="name-input" placeholder="Имя" class="form__input form__input_type_name" minlength="2" maxlength="40" required>
+        <span class="form__error name-input-error" ></span>
+        <input type="text" name="aboutMe" id="about-input" placeholder="О себе" class="form__input form__input_type_about" minlength="2" maxlength="200" required>
+        <span class="form__error about-input-error"></span>
         <button type="submit" class="form__submit">Сохранить</button>
       </form> 
     </div>
@@ -44,9 +49,11 @@
     <div class="popup__container">
       <button class="popup__close" type="button"> <img src="./images/close-icon.svg" alt="Закрыть" class="popup__close-image"></button>
       <h3 class="popup__title">Новое место</h3>
-      <form action="#" class="form" name="form">
-        <input type="text" name="name" placeholder="Название" class="form__input form__input_type_title">
-        <input type="url" name="link-image" placeholder="Ссылка на картинку" class="form__input form__input_type_link">
+      <form action="#" class="form" name="formCard" novalidate>
+        <input type="text" name="nameCard" id="place-input" placeholder="Название" class="form__input form__input_type_title" minlength="2" maxlength="30" required>
+        <span class="form__error place-input-error"></span>
+        <input type="url" name="linkImage" id="url-input" placeholder="Ссылка на картинку" class="form__input form__input_type_link" required>
+        <span class="form__error url-input-error"></span>
         <button type="submit" class="form__submit">Создать</button>
       </form> 
     </div>
@@ -60,6 +67,8 @@
       </button>
     </div>
   </div>
+
+
  <template id="card-template">
   <li class="еlement">
     <img class="еlement__image" src='#' alt='#'>
