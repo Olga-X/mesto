@@ -12,8 +12,6 @@ const profileForm = profilePopup.querySelector('.form');
 const profileNameInput = profilePopup.querySelector('.form__input_type_name');
 const profileAboutInput = profilePopup.querySelector('.form__input_type_about');
 
-
-
 // Форма добавления карточки
 const cardAddBtn = document.querySelector('.profile__button-add');
 const cardAddName = cardPopup.querySelector('.form__input_type_title');
@@ -87,7 +85,7 @@ function createCard(cardСontent) {
   element.remove();
 });
 
-cardElementImage.addEventListener('click', () => {
+  cardElementImage.addEventListener('click', () => {
   handleShowImage(cardСontent);
 });
 
@@ -108,16 +106,20 @@ function closePopup(popup) {
 
 // Открывает-закрывает кнопка добавления карточки
   cardAddBtn.addEventListener('click', () => {
+    cardAddName.value = "";
+    cardAddLink.value = "";
+    disableButtonOnOpening(cardAddForm, config);
+    hideInputError(cardAddForm, cardAddName, config);
+    hideInputError(cardAddForm, cardAddLink, config);
     openPopup(cardPopup);
 });
 
   cardCloseBtn.addEventListener('click', () => {
-  closePopup(cardPopup);
+    closePopup(cardPopup);
 });
 
 // Функция открытия-закрытия окна подробного просмотра нажатием на картинку
 function handleShowImage(popupShownContent) {
-  
   imageReviewDesc.textContent = popupShownContent.name;
   imageReview.alt = popupShownContent.name;
   imageReview.src = popupShownContent.link;
@@ -132,7 +134,6 @@ imageCloseBtn.addEventListener('click', () => {
 profileEditBtn.addEventListener('click', () => {
   profileNameInput.value = profileName.textContent;
   profileAboutInput.value = profileDescription.textContent;
-  
   disableButtonOnOpening(profileForm, config);
   hideInputError(profileForm, profileNameInput, config);
   hideInputError(profileForm, profileAboutInput, config);
