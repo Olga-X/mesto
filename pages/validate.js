@@ -51,12 +51,6 @@ function toggleButtonState(form, config) {
   }
 }
 
-function disableButtonOnOpening(form, config) {
-  const button = form.querySelector(config.submitButtonSelector);
-  button.classList.add(config.inactiveButtonClass);
-  button.setAttribute("disabled", true);
-}
-
 function enableValidation(config) {
   const forms = Array.from(document.querySelectorAll(config.formSelector));
   forms.forEach((form) => {

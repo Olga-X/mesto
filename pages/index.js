@@ -94,23 +94,21 @@ function createCard(cardСontent) {
 
 // Функция открытия
 function openPopup(popup) {
+  document.addEventListener("keydown", closePressEsc);
   popup.classList.add('popup_opened');
-  document.addEventListener("keydown", closeByEsc);
 }
 
 // Функция закрытия
 function closePopup(popup) {
+  document.removeEventListener("keydown", closePressEsc);
   popup.classList.remove('popup_opened'); 
-  document.removeEventListener("keydown", closeByEsc);
 }
 
 // Открывает-закрывает кнопка добавления карточки
   cardAddBtn.addEventListener('click', () => {
     cardAddName.value = "";
     cardAddLink.value = "";
-    disableButtonOnOpening(cardAddForm, config);
-    hideInputError(cardAddForm, cardAddName, config);
-    hideInputError(cardAddForm, cardAddLink, config);
+    toggleButtonState(cardAddForm, config);
     openPopup(cardPopup);
 });
 
@@ -134,9 +132,7 @@ imageCloseBtn.addEventListener('click', () => {
 profileEditBtn.addEventListener('click', () => {
   profileNameInput.value = profileName.textContent;
   profileAboutInput.value = profileDescription.textContent;
-  disableButtonOnOpening(profileForm, config);
-  hideInputError(profileForm, profileNameInput, config);
-  hideInputError(profileForm, profileAboutInput, config);
+  toggleButtonState(profileForm, config);
   openPopup(profilePopup);
 });
 
@@ -145,7 +141,7 @@ profileCloseBtn.addEventListener('click', () => {
 });
 
 // Закрытие кнопкой esc
-function closeByEsc(evt) {
+function closePressEsc(evt) {
   if (evt.key === "Escape") {
       closePopup(document.querySelector(".popup_opened"));
   }

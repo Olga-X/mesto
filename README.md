@@ -31,5 +31,3 @@
 Автор картинок студентка разрабатывающая проект.
 
 * [Ссылка на страницу проекта на GitHub Pages](https://olga-x.github.io/mesto/) 
-
-![Скрин проекта](https://drive.google.com/file/d/1Xb-XeiJ-eGEjMWQRxfU8qa74Po_MYq1T/view?usp=sharing)

@@ -1,16 +1,15 @@
 .form__error {
+  display: block;
+  visibility: hidden;
   font-family: "Inter", "Arial", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 1.25;
   color: #ff0000;
-  display: block;
-  visibility: hidden;
   position: absolute;
   text-align: start;
   top: 148px;
- 
 }
 
 @media screen and (max-width: 420px) {
