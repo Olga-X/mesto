@@ -11,6 +11,7 @@ const profileDescription = document.querySelector('.profile__text');
 const profileForm = profilePopup.querySelector('.form');
 const profileNameInput = profilePopup.querySelector('.form__input_type_name');
 const profileAboutInput = profilePopup.querySelector('.form__input_type_about');
+const submitProfileBtn = profileForm.querySelector('.form__submit');
 
 // Форма добавления карточки
 const cardAddBtn = document.querySelector('.profile__button-add');
@@ -18,6 +19,7 @@ const cardAddName = cardPopup.querySelector('.form__input_type_title');
 const cardAddLink = cardPopup.querySelector('.form__input_type_link');
 const cardCloseBtn = cardPopup.querySelector('.popup__close');
 const cardAddForm = cardPopup.querySelector('.form');
+const submitCardBtn = cardAddForm.querySelector('.form__submit');
 
 // Форма подробного просмотра картинки
 const imageCloseBtn = imagePopup.querySelector('.popup__close');
@@ -25,9 +27,9 @@ const imageReview = imagePopup.querySelector('.popup__image');
 const imageReviewDesc = imagePopup.querySelector('.popup__description');
 
 const cardsContainer = document.querySelector('.еlements__container');
-const cardTemplate= document.querySelector('#card-template');
+const cardTemplate = document.querySelector('#card-template');
 
-const overlays = Array.from(document.querySelectorAll(".popup"));
+const overlays = document.querySelectorAll('.popup');
 
 const initialCards = [
   {
@@ -106,15 +108,12 @@ function closePopup(popup) {
 
 // Открывает-закрывает кнопка добавления карточки
   cardAddBtn.addEventListener('click', () => {
-    cardAddName.value = "";
-    cardAddLink.value = "";
-    toggleButtonState(cardAddForm, config);
+    cardAddForm.reset();
+    toggleButtonState(cardAddForm, config, submitCardBtn);
     openPopup(cardPopup);
 });
 
-  cardCloseBtn.addEventListener('click', () => {
-    closePopup(cardPopup);
-});
+ cardCloseBtn.addEventListener('click', () => {closePopup(cardPopup)});
 
 // Функция открытия-закрытия окна подробного просмотра нажатием на картинку
 function handleShowImage(popupShownContent) {
@@ -124,21 +123,17 @@ function handleShowImage(popupShownContent) {
   openPopup(imagePopup);
 }
 
-imageCloseBtn.addEventListener('click', () => {
-  closePopup(imagePopup);
-});
+ imageCloseBtn.addEventListener('click', () => {closePopup(imagePopup)});
 
 // Открывает-закрывает профиль
 profileEditBtn.addEventListener('click', () => {
   profileNameInput.value = profileName.textContent;
   profileAboutInput.value = profileDescription.textContent;
-  toggleButtonState(profileForm, config);
+  toggleButtonState(profileForm, config, submitProfileBtn);
   openPopup(profilePopup);
 });
 
-profileCloseBtn.addEventListener('click', () => {
-  closePopup(profilePopup);
-});
+ profileCloseBtn.addEventListener('click', () => {closePopup(profilePopup)});
 
 // Закрытие кнопкой esc
 function closePressEsc(evt) {
@@ -148,15 +143,13 @@ function closePressEsc(evt) {
 }
 
 // Закрытие кликом оверлей
-
 overlays.forEach((overlay) => {
   overlay.addEventListener("click", (evt) => {
-      if (evt.target === evt.currentTarget) {
-          closePopup(document.querySelector(".popup_opened"));
-      }
+if (evt.target === evt.currentTarget) {
+  closePopup(overlay);
+    }
   });
 });
-
 
 // Обработчик «отправки» формы для изменения профиля
 function profileEditSubmit(evt) {
