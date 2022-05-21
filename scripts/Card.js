@@ -1,19 +1,14 @@
-import { openPopup, closePopup} from  "./utils.js"
-
+import {openPopup, closePopup} from  "./utils.js"
 
 export class Card {
   _imagePopup = document.querySelector('.popup_review-image');
   _imageReview = this._imagePopup.querySelector('.popup__image');
   _imageReviewDesc = this._imagePopup.querySelector('.popup__description');
 
-
 constructor(data, selector) {
 	this._name = data.name;
 	this._link = data.link;
 	this._selector = selector;
-
-  this._toggleLike = this._toggleLike.bind(this);
-  this._deleteCard = this._deleteCard.bind(this);
 }
 
 _getElement() {
@@ -26,15 +21,8 @@ _getElement() {
   return cardElement;
 }
 
-_resetShowImage() {
-  this._imageReviewDesc.textContent = '';
-  this._imageReview.alt = '';
-  this._imageReview.src = '';
-}
-
 // открытиe окна подробного просмотра нажатием на картинку
 _handleShowImage() {
-  this._resetShowImage();
   this._imageReviewDesc.textContent = this._name;
   this._imageReview.alt = this._name;
   this._imageReview.src = this._link;
@@ -46,7 +34,8 @@ _handleClosePopup(){
 
 // лайк
 _toggleLike() {
-  this._element.querySelector('.еlement__like').classList.toggle('еlement__like_active');
+  this._element.querySelector('.еlement__like')
+  .classList.toggle('еlement__like_active');
 }
 
 // удаление карточки 
@@ -59,19 +48,15 @@ _deleteCard() {
 _setEventListeners() {
    // событие открытия попапа
   this._element.querySelector('.еlement__image')
- .addEventListener('click', () => {this._handleShowImage});
-
+ .addEventListener('click', () => {this._handleShowImage()});
 
   // событие лайка
   this._element.querySelector('.еlement__like')
-  .addEventListener('click', this._toggleLike);
+  .addEventListener('click',  () => {this._toggleLike()});
 
   // событие удаления карточки
-this._element.querySelector('.element__btn-trash')
-.addEventListener('click', this._deleteCard);
-
-// событие закрытия попапа
-
+  this._element.querySelector('.element__btn-trash')
+  .addEventListener('click', () =>{this._deleteCard()});
 
 };
 
@@ -85,5 +70,4 @@ generate() {
 
   return this._element;
   };
-
 }

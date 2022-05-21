@@ -1,27 +1,24 @@
-const config = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__submit',
-  inactiveButtonClass: 'form__submit_disabled',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__error_visible'
-};
-
 class FormValidator {
   constructor(config, formSelector) {
     this._form = formSelector;
+    this._input = config.inputSelector;
     this._button = config.submitButtonSelector;
     this._inactiveButton = config.inactiveButtonClass;
     this._inputError = config.inputErrorClass;
-    this._input = config.inputSelector;
     this._error = config.errorClass;
   }
 
+  enableValidation() {
+    this._form.addEventListener("submit", (evt) => {
+    evt.preventDefault()
+  });
+    this._setEventListeners();
+  };
   
-  _showInputError(input) {
+  _showInputError(input, errorMessage) {
     const errorElement = this._form.querySelector(`.${input.id}-error`);
     input.classList.add(this._inputError);
-    errorElement.textContent = input.errorMessage;
+    errorElement.textContent = errorMessage;
     errorElement.classList.add(this._error);
   }
   
@@ -34,19 +31,19 @@ class FormValidator {
   
   _checkInputValidity(input) {
     if (!input.validity.valid) {
-      this._showInputError(input);
+      this._showInputError(input, input.validationMessage);
     } else {
       this._hideInputError(input);
     }
   }
   
-  _setEventListeners(form, config) {
-    const inputs = Array.from(this._form.querySelectorAll(this._input));
+  _setEventListeners() {
     this._toggleButtonState();
+    const inputs = Array.from(this._form.querySelectorAll(this._input));
     inputs.forEach((input) => {
         input.addEventListener("input", () => {
           this._checkInputValidity(input);
-            this._toggleButtonState();
+          this._toggleButtonState();
         });
     });
   };
@@ -66,23 +63,17 @@ class FormValidator {
     }
 }
   
-  enableValidation() {
-      this._form.addEventListener("submit", (evt) => 
-      evt.preventDefault());
-      this._setEventListeners();
-    };
-    // при открытии попапов в index.js очисткa ошибок
-
-    clearErrorsOnOpening(input) {
+    // при открытии попапов очисткa ошибок (в index.js )
+  clearErrorsOnOpening(input) {
       const errorElement = this._form.querySelector(`.${input.id}-error`);
       input.classList.remove(this._inputError);
       errorElement.textContent = "";
       errorElement.classList.remove(this._error);
   }
-  // при открытии попапов в index.js сброса состояния кнопки
-disableButtonOnOpening() {
+  // при открытии попапов сброса состояния кнопки (в index.js )
+  disableButtonOnOpening() {
   this._form.querySelector(this._button).setAttribute("disabled", true);
 }
   
 }
-export { FormValidator, config };
+export {FormValidator};

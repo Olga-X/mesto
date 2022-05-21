@@ -1,4 +1,4 @@
-export { openPopup, closePopup, closePressEsc}
+export {openPopup, closePopup}
 
 // Функция открытия
 function openPopup(popup) {

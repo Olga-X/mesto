@@ -1,12 +1,11 @@
-import { openPopup, closePopup} from './utils.js';
+import {openPopup, closePopup} from './utils.js';
 import {Card} from './Card.js';
-import { FormValidator, config} from './FormValidator.js';
-
+import {FormValidator} from './FormValidator.js';
 
 // Модальные окна попапы
 const profilePopup = document.querySelector('.popup_form_edit-profile');
 const cardPopup = document.querySelector('.popup_form_add-card');
-//const imagePopup = document.querySelector('.popup_review-image');
+const imagePopup = document.querySelector('.popup_review-image');
 
 // Форма добавления профиля
 const profileEditBtn = document.querySelector('.profile__button-edit');
@@ -16,7 +15,7 @@ const profileDescription = document.querySelector('.profile__text');
 const profileForm = profilePopup.querySelector('.form');
 const profileNameInput = profilePopup.querySelector('.form__input_type_name');
 const profileAboutInput = profilePopup.querySelector('.form__input_type_about');
-const submitProfileBtn = profileForm.querySelector('.form__submit');
+//const submitProfileBtn = profileForm.querySelector('.form__submit');
 
 // Форма добавления карточки
 const cardAddBtn = document.querySelector('.profile__button-add');
@@ -24,10 +23,10 @@ const cardAddName = cardPopup.querySelector('.form__input_type_title');
 const cardAddLink = cardPopup.querySelector('.form__input_type_link');
 const cardCloseBtn = cardPopup.querySelector('.popup__close');
 const cardAddForm = cardPopup.querySelector('.form');
-const submitCardBtn = cardAddForm.querySelector('.form__submit');
+//const submitCardBtn = cardAddForm.querySelector('.form__submit');
 
 // Форма подробного просмотра картинки
-//const imageCloseBtn = imagePopup.querySelector('.popup__close');
+const imageCloseBtn = imagePopup.querySelector('.popup__close');
 //const imageReview = imagePopup.querySelector('.popup__image');
 //const imageReviewDesc = imagePopup.querySelector('.popup__description');
 
@@ -63,6 +62,15 @@ const initialCards = [
   }
 ]; 
 
+const config = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__submit',
+  inactiveButtonClass: 'form__submit_disabled',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__error_visible'
+};
+
 // валидация
 
 const validationProfileForm = new FormValidator(config, profileForm);
@@ -76,7 +84,7 @@ validationCardAddForm.enableValidation();
 const generateCard = (card) => new Card(card, '#card-template').generate();
 
 const renderCards = (cards) => (
-  cards.reverse().forEach((card) => cardsContainer.append(generateCard(card)))
+  cards.forEach((card) => cardsContainer.append(generateCard(card)))
 );
 
 const addCardTop = () => {
@@ -97,75 +105,18 @@ cardAddForm.addEventListener('submit', (evt) => {
 cardAddForm.reset();
 });
 
-
-/*/// Добавляем карточки в html
-function render(){
-  const cards=initialCards.map(createCard);
-  cardsContainer.prepend(...cards);
-}
-
-function createCard(cardСontent) {
-  cardElement = cardTemplate.content.cloneNode(true);
-  const cardElementImage = cardElement.querySelector('.еlement__image');
-  const cardElementName = cardElement.querySelector('.еlement__title');
-  const cardElementBtn = cardElement.querySelector('.element__btn-trash');
-  const cardElementLike = cardElement.querySelector('.еlement__like');
-
-// Cвязи между объектами массива
-  cardElementImage.src = cardСontent.link;
-  cardElementName.textContent = cardСontent.name;
-  cardElementImage.alt = cardСontent.name;/*/
-
-/*/ Функция лайка 
-  cardElementLike.addEventListener('click', (evt) => {
-    evt.target.classList.toggle('еlement__like_active');
-  });/*/ 
-
-/*/// Функция удаления карточки 
-  cardElementBtn.addEventListener('click', (evt) => {
-  const element = evt.target.closest('.еlement');
-  element.remove();
-});
-
-  cardElementImage.addEventListener('click', () => {
-  handleShowImage(cardСontent);
-});
-
-  return cardElement;
-}/*/
-
-/*/// Функция открытия
-function openPopup(popup) {
-  document.addEventListener("keydown", closePressEsc);
-  popup.classList.add('popup_opened');
-}/*/
-
-/*/// Функция закрытия
-function closePopup(popup) {
-  document.removeEventListener("keydown", closePressEsc);
-  popup.classList.remove('popup_opened'); 
-}/*/
-
 // Открывает-закрывает кнопка добавления карточки
 cardAddBtn.addEventListener('click', () => {
   openPopup(cardPopup);
-  
   validationCardAddForm.disableButtonOnOpening();
-  validationCardAddForm.clearErrorsOnOpening(cardAddForm);
-  
+  validationCardAddForm.clearErrorsOnOpening(cardAddName, cardAddLink);
 });
 
  cardCloseBtn.addEventListener('click', () => {closePopup(cardPopup)});
 
-/*/ Функция открытия-закрытия окна подробного просмотра нажатием на картинку
-function handleShowImage(popupShownContent) {
-  imageReviewDesc.textContent = popupShownContent.name;
-  imageReview.alt = popupShownContent.name;
-  imageReview.src = popupShownContent.link;
-  openPopup(imagePopup);
-}/*/
+//закрытиу окна подробного просмотра нажатием на картинку
 
- //imageCloseBtn.addEventListener('click', () => {closePopup(imagePopup)});
+ imageCloseBtn.addEventListener('click', () => {closePopup(imagePopup)});
 
 // Открывает-закрывает профиль
 profileEditBtn.addEventListener('click', () => {
@@ -176,13 +127,6 @@ profileEditBtn.addEventListener('click', () => {
 });
 
  profileCloseBtn.addEventListener('click', () => {closePopup(profilePopup)});
-
-/*/// Закрытие кнопкой esc
-function closePressEsc(evt) {
-  if (evt.key === "Escape") {
-      closePopup(document.querySelector(".popup_opened"));
-  }
-}/*/
 
 // Закрытие кликом оверлей
 overlays.forEach((overlay) => {
@@ -205,16 +149,6 @@ function profileEditSubmit(evt) {
 // Обработчик к форме он будет следить за событием “submit” - «отправка»
 profileForm.addEventListener('submit', profileEditSubmit);
 
-
-// Обработчик «отправки» формы добавления карточки
-//cardAddForm.addEventListener('submit', handleCardFormSubmit);
-
-
-/*/// Функция добавление новой карточки в начало списка
-function addCardTop(cardСontent, cardPopup) {
-  const card = createCard(cardСontent);
-    cardPopup.prepend(card);
-}/*/
-
 renderCards(initialCards);
-/*/render();/*/
+
+export {config}
