@@ -1,12 +1,10 @@
-import {openPopup, closePopup} from  "./utils.js"
+import {openPopup} from  "./utils.js"
 
 export class Card {
   _imagePopup = document.querySelector('.popup_review-image');
   _imageReview = this._imagePopup.querySelector('.popup__image');
   _imageReviewDesc = this._imagePopup.querySelector('.popup__description');
-  _cardElementLike = document.querySelector('.еlement__like');
-  _cardImage = document.querySelector('.еlement__image');
-  _cardElementBtn = document.querySelector('.element__btn-trash');
+ 
 
 constructor(data, templateSelector ) {
 	this._name = data.name;
@@ -32,11 +30,10 @@ _handleShowImage() {
   openPopup(this._imagePopup);
 }
 
-
 // лайк
 _toggleLike() {
-  this._cardElementLike.querySelector('.еlement__like')
-  .classList.toggle('еlement__like_active');
+  const cardImage = this._element.querySelector('.еlement__like');
+  cardImage.classList.toggle('еlement__like_active');
 }
 
 // удаление карточки 
@@ -48,20 +45,25 @@ _deleteCard() {
 // слушатели событий
 _setEventListeners() {
    // событие открытия попапа
-   this._cardImage.addEventListener('click', () => {this._handleShowImage()});
+  const cardImage = this._element.querySelector('.еlement__image');
+  cardImage.addEventListener('click', () => {this._handleShowImage()});
 
   // событие лайка
-  this._cardElementLike.addEventListener('click',  () => {this._toggleLike()});
+  const cardElementLike = this._element.querySelector('.еlement__like');
+  cardElementLike.addEventListener('click',  () => {this._toggleLike()});
 
   // событие удаления карточки
-  this._cardElementBtn.addEventListener('click', () =>{this._deleteCard()});
+  const cardElementTrash = this._element.querySelector('.element__btn-trash')
+  cardElementTrash.addEventListener('click', () =>{this._deleteCard()});
 };
 
 generate() {
   this._element = this._getElement();
-  this._element.querySelector('.еlement__image').src = this._link;
+
+  const cardImage = this._element.querySelector('.еlement__image');
+  cardImage.src = this._link;
+  cardImage.alt = this._name;
   this._element.querySelector('.еlement__title').textContent = this._name;
-  this._element.querySelector('.еlement__image').alt = this._name;
 
   this._setEventListeners();
 

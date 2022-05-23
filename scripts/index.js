@@ -107,13 +107,13 @@ cardAddForm.reset();
 
 // Открывает-закрывает кнопка добавления карточки
 cardAddBtn.addEventListener('click', () => {
-  validationCardAddForm.clearErrorsOnOpening();
   openPopup(cardPopup);
+  validationCardAddForm.clearErrorsOnOpening();
 });
 
  cardCloseBtn.addEventListener('click', () => {closePopup(cardPopup)});
 
-//закрытиe окна подробного просмотра нажатием на картинку
+//закрытиу окна подробного просмотра нажатием на картинку
 
  imageCloseBtn.addEventListener('click', () => {closePopup(imagePopup)});
 
@@ -121,8 +121,8 @@ cardAddBtn.addEventListener('click', () => {
 profileEditBtn.addEventListener('click', () => {
   profileNameInput.value = profileName.textContent;
   profileAboutInput.value = profileDescription.textContent;
-  validationProfileForm.clearErrorsOnOpening();
   openPopup(profilePopup);
+  validationProfileForm.clearErrorsOnOpening();
 });
 
  profileCloseBtn.addEventListener('click', () => {closePopup(profilePopup)});
