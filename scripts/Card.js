@@ -4,16 +4,19 @@ export class Card {
   _imagePopup = document.querySelector('.popup_review-image');
   _imageReview = this._imagePopup.querySelector('.popup__image');
   _imageReviewDesc = this._imagePopup.querySelector('.popup__description');
+  _cardElementLike = document.querySelector('.еlement__like');
+  _cardImage = document.querySelector('.еlement__image');
+  _cardElementBtn = document.querySelector('.element__btn-trash');
 
-constructor(data, selector) {
+constructor(data, templateSelector ) {
 	this._name = data.name;
 	this._link = data.link;
-	this._selector = selector;
+	this._templateSelector = templateSelector ;
 }
 
 _getElement() {
   const cardElement = document
-    .querySelector(this._selector)
+    .querySelector(this._templateSelector)
     .content
     .querySelector('.еlement')
     .cloneNode(true);
@@ -28,13 +31,11 @@ _handleShowImage() {
   this._imageReview.src = this._link;
   openPopup(this._imagePopup);
 }
-// закрытие попапа картинки
-_handleClosePopup(){
-  closePopup(this._imagePopup)};
+
 
 // лайк
 _toggleLike() {
-  this._element.querySelector('.еlement__like')
+  this._cardElementLike.querySelector('.еlement__like')
   .classList.toggle('еlement__like_active');
 }
 
@@ -47,17 +48,13 @@ _deleteCard() {
 // слушатели событий
 _setEventListeners() {
    // событие открытия попапа
-  this._element.querySelector('.еlement__image')
- .addEventListener('click', () => {this._handleShowImage()});
+   this._cardImage.addEventListener('click', () => {this._handleShowImage()});
 
   // событие лайка
-  this._element.querySelector('.еlement__like')
-  .addEventListener('click',  () => {this._toggleLike()});
+  this._cardElementLike.addEventListener('click',  () => {this._toggleLike()});
 
   // событие удаления карточки
-  this._element.querySelector('.element__btn-trash')
-  .addEventListener('click', () =>{this._deleteCard()});
-
+  this._cardElementBtn.addEventListener('click', () =>{this._deleteCard()});
 };
 
 generate() {
