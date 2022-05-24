@@ -6,6 +6,8 @@ class FormValidator {
     this._inactiveButton = config.inactiveButtonClass;
     this._inputError = config.inputErrorClass;
     this._error = config.errorClass;
+    this._inputs = Array.from(this._form.querySelectorAll(this._input));
+    this._buttonElement = this._form.querySelector(this._button);
   }
 
   enableValidation() {
@@ -37,32 +39,28 @@ class FormValidator {
     }
   }
   
-  _setEventListeners() {
-    this._toggleButtonState();
-    this._inputs = Array.from(this._form.querySelectorAll(this._input));
-    this._buttonElement = this._form.querySelector(this._button);
-    this._inputs.forEach((input) => {
-        input.addEventListener("input", () => {
-          this._checkInputValidity(input);
-          this._toggleButtonState();
-        });
-    });
-  };
-  
-  // Функция, меняющая состояние кнопки сабмита. 
+
+ // Функция, меняющая состояние кнопки сабмита. 
   _toggleButtonState() {
     if (!this._form.checkValidity()) {
-       this._buttonElement = this._form
-            .querySelector(this._button)
-            .classList.add(this._inactiveButton);
-            this._buttonElement = this._form.querySelector(this._button).setAttribute("disabled", true);
+       this._buttonElement.classList.add(this._inactiveButton);
+            this._buttonElement.setAttribute("disabled", true);
     } else {
-      this._buttonElement = this._form
-            .querySelector(this._button)
-            .classList.remove(this._inactiveButton);
-            this._buttonElement = this._form.querySelector(this._button).removeAttribute("disabled", true);
+      this._buttonElement.classList.remove(this._inactiveButton);
+            this._buttonElement.removeAttribute("disabled", true);
     }
 }
+
+_setEventListeners() {
+  this._toggleButtonState();
+ 
+  this._inputs.forEach((input) => {
+      input.addEventListener("input", () => {
+        this._checkInputValidity(input);
+        this._toggleButtonState();
+      });
+  });
+};
   
     // при открытии попапов очисткa ошибок (в index.js)
   clearErrorsOnOpening() {
