@@ -1,6 +1,6 @@
-import {openPopup, closePopup} from './utils.js';
-import {Card} from './Card.js';
-import {FormValidator} from './FormValidator.js';
+import {openPopup, closePopup} from '../scripts/components/utils.js';
+import {Card} from '../scripts/components/Card.js';
+import {FormValidator} from '../scripts/components/FormValidator.js';
 
 // Модальные окна попапы
 const profilePopup = document.querySelector('.popup_form_edit-profile');
@@ -33,7 +33,7 @@ const imageCloseBtn = imagePopup.querySelector('.popup__close');
 const cardsContainer = document.querySelector('.еlements__container');
 //const cardTemplate = document.querySelector('#card-template');
 
-const overlays = document.querySelectorAll('.popup');
+//const overlays = document.querySelectorAll('.popup');
 
 const initialCards = [
   {
@@ -126,15 +126,6 @@ profileEditBtn.addEventListener('click', () => {
 });
 
  profileCloseBtn.addEventListener('click', () => {closePopup(profilePopup)});
-
-// Закрытие кликом оверлей
-overlays.forEach((overlay) => {
-  overlay.addEventListener("click", (evt) => {
-if (evt.target === evt.currentTarget) {
-  closePopup(overlay);
-    }
-  });
-});
 
 // Обработчик «отправки» формы для изменения профиля
 function profileEditSubmit(evt) {

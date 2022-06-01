@@ -6,10 +6,11 @@ export class Card {
   _imageReviewDesc = this._imagePopup.querySelector('.popup__description');
 
 
-constructor(data, templateSelector ) {
+constructor(data, {handleCardClick}, templateSelector) {
 	this._name = data.name;
 	this._link = data.link;
 	this._templateSelector = templateSelector ;
+  this._handleCardClick = handleCardClick;
 }
 
 _getElement() {
