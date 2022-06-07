@@ -1,19 +1,17 @@
-import {openPopup} from  "./utils.js"
-
-export class Card {
+export default class Card {
   _imagePopup = document.querySelector('.popup_review-image');
   _imageReview = this._imagePopup.querySelector('.popup__image');
   _imageReviewDesc = this._imagePopup.querySelector('.popup__description');
 
 
-constructor(data, {handleCardClick}, templateSelector) {
+constructor(data, templateSelector, handleCardClick) {
 	this._name = data.name;
 	this._link = data.link;
-	this._templateSelector = templateSelector ;
+	this._templateSelector = templateSelector;
   this._handleCardClick = handleCardClick;
 }
 
-_getElement() {
+ _getElement() {
   const cardElement = document
     .querySelector(this._templateSelector)
     .content
@@ -23,13 +21,13 @@ _getElement() {
   return cardElement;
 }
 
-// открытиe окна подробного просмотра нажатием на картинку
+/*/ открытиe окна подробного просмотра нажатием на картинку
 _handleShowImage() {
   this._imageReviewDesc.textContent = this._name;
   this._imageReview.alt = this._name;
   this._imageReview.src = this._link;
   openPopup(this._imagePopup);
-}
+}/*/ 
 
 //метод like карточки
 _toggleLike() {
@@ -45,7 +43,7 @@ _deleteCard() {
 // слушатели событий
 _setEventListeners() {
    // событие открытия попапа
-   this._cardImage.addEventListener('click', () => {this._handleShowImage()});
+   this._cardImage.addEventListener('click', () => {this._handleCardClick(this._name, this._link)});
 
   // событие лайка
   this._cardElementLike = this._element.querySelector('.еlement__like');
@@ -56,7 +54,7 @@ _setEventListeners() {
   this._cardElementTrash.addEventListener('click', () =>{this._deleteCard()});
 };
 
-generate() {
+generateCard() {
   this._element = this._getElement();
 
   this._cardImage = this._element.querySelector('.еlement__image');
@@ -68,4 +66,5 @@ generate() {
 
   return this._element;
   };
+
 }
