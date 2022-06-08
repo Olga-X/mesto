@@ -21,14 +21,6 @@ constructor(data, templateSelector, handleCardClick) {
   return cardElement;
 }
 
-/*/ открытиe окна подробного просмотра нажатием на картинку
-_handleShowImage() {
-  this._imageReviewDesc.textContent = this._name;
-  this._imageReview.alt = this._name;
-  this._imageReview.src = this._link;
-  openPopup(this._imagePopup);
-}/*/ 
-
 //метод like карточки
 _toggleLike() {
   this._cardElementLike.classList.toggle('еlement__like_active');

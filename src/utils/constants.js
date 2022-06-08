@@ -34,16 +34,13 @@ export const config = {
   errorClass: 'form__error_visible'
 };
 
-export const profileForm = document.forms.formProfile;
+export const profileForm = document.querySelector('#editPopupForm');
 export const profileNameInput = document.querySelector('.form__input_type_name');
 export const profileAboutInput = document.querySelector('.form__input_type_about');
 
-export const cardAddForm = document.forms.formCard;
+export const cardAddForm = document.querySelector('#cardPopupForm');
 export const cardAddName = cardAddForm.elements.nameCard;
 export const cardAddLink = cardAddForm.elements.linkImage;
 
-
-export const cardAddBtn = document.querySelector('.profile__button-add');
-export const profileEditBtn = document.querySelector('.profile__button-edit');
 export const cardsContainer = document.querySelector('.еlements__container');
 export const cardTemplate = document.querySelector('#card-template');
