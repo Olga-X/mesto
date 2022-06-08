@@ -8,7 +8,7 @@ export default class PopupWithImage extends Popup {
     this._imageReviewDesc = this._popup.querySelector(".popup__description");
   }
 
-    open({link, name}) {
+    open({name, link}) {
     this._imageReviewDesc.textContent = name;
     this._imageReview.alt = name;
     this._imageReview.src = link;

@@ -6,13 +6,16 @@ export default class Section {
   }
 
   renderItems() {
-    this._renderedItems.map(item => {
-      return this._renderer(item);
+    this._renderedItems.forEach((item) => {
+      this._renderer(item);
     });
   }
 
   addItem(elem) {
-    this._container.prepend(elem)
+    this._container.append(elem)
+  }
+  addNewCard(elem) {
+    this._container.prepend(elem);
   }
 
 }

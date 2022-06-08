@@ -26,7 +26,7 @@ export const initialCards = [
 ]; 
 
 export const config = {
-  formSelector: '.form',
+ // formSelector: '.form',
   inputSelector: '.form__input',
   submitButtonSelector: '.form__submit',
   inactiveButtonClass: 'form__submit_disabled',
@@ -34,13 +34,14 @@ export const config = {
   errorClass: 'form__error_visible'
 };
 
+
 export const profileForm = document.querySelector('#editPopupForm');
 export const profileNameInput = document.querySelector('.form__input_type_name');
 export const profileAboutInput = document.querySelector('.form__input_type_about');
 
 export const cardAddForm = document.querySelector('#cardPopupForm');
-export const cardAddName = cardAddForm.elements.nameCard;
-export const cardAddLink = cardAddForm.elements.linkImage;
+export const cardAddName = document.querySelector('.form__input_type_title');
+export const cardAddLink = document.querySelector('.form__input_type_link');
 
 export const cardsContainer = document.querySelector('.еlements__container');
 export const cardTemplate = document.querySelector('#card-template');
