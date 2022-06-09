@@ -21,6 +21,7 @@ constructor(data, templateSelector, handleCardClick) {
   return cardElement;
 }
 
+
 //метод like карточки
 _toggleLike() {
   this._cardElementLike.classList.toggle('еlement__like_active');

@@ -12,6 +12,9 @@ import {config,
   cardAddForm,
   profileNameInput,
   profileAboutInput,
+  
+  cardAddLink,
+  cardAddName
  } from "../utils/constants.js";
 
 const profileEditBtn = document.querySelector('.profile__button-edit');
@@ -23,13 +26,19 @@ validationProfileForm.enableValidation();
 const validationCardAddForm = new FormValidator(config, cardAddForm);
 validationCardAddForm.enableValidation();
 
+// Класс для открытия попапа картинки
+const imagePopup  = new PopupWithImage({
+  popupSelector: '.popup_review-image',
+});
+
 // Функция создания карточки
 function createCard(item) {
-  const card = new Card(item, "#card-template", () => {
+  const card = new Card(item,  "#card-template", () => {
     imagePopup.open(item);
   }).generateCard();
-  return card;
-}
+  return card
+} 
+
 
 // Отрисовка карточек
 const cardList = new Section({
@@ -39,12 +48,6 @@ const cardList = new Section({
   },
 }, '.еlements__container');
 cardList.renderItems();
-
-// Класс для открытия попапа картинки
-const imagePopup  = new PopupWithImage({
-  popupSelector: '.popup_review-image',
-});
-imagePopup.setEventListeners();
 
 
 // Класс создания картинки и формы 
@@ -56,8 +59,6 @@ const cardPopup = new PopupWithForm({
 },
 }); 
 
-cardPopup.setEventListeners();
-
 // Редактирование профиля
 const profilePopup = new PopupWithForm({
   popupSelector: ".popup_form_edit-profile", 
@@ -66,7 +67,7 @@ const profilePopup = new PopupWithForm({
   profilePopup.close();
   }
 });
-profilePopup.setEventListeners();
+
 
 const userInfo = new UserInfo({
   nameSelector: ".profile__title", 
@@ -74,6 +75,10 @@ const userInfo = new UserInfo({
 });
 
 // СЛУШАТЕЛИ
+imagePopup.setEventListeners();
+profilePopup.setEventListeners();
+cardPopup.setEventListeners();
+
 
 // Открывает-закрывает профиль
 profileEditBtn.addEventListener('click', () => {
