@@ -34,7 +34,6 @@ export const config = {
   errorClass: 'form__error_visible'
 };
 
-
 export const profileForm = document.querySelector('#editPopupForm');
 export const profileNameInput = document.querySelector('.form__input_type_name');
 export const profileAboutInput = document.querySelector('.form__input_type_about');

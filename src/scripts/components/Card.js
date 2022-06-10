@@ -59,5 +59,4 @@ generateCard() {
 
   return this._element;
   };
-
 }

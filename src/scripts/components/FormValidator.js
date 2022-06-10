@@ -39,7 +39,6 @@ export default class FormValidator {
     }
   }
   
-
  // Функция, меняющая состояние кнопки сабмита. 
   _toggleButtonState() {
     if (!this._form.checkValidity()) {
