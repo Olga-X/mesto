@@ -74,7 +74,9 @@ cardPopup.setEventListeners();
 
 // Открывает-закрывает профиль
 profileEditBtn.addEventListener('click', () => {
- userInfo.getUserInfo(profileNameInput, profileAboutInput);
+  const currentInfo = userInfo.getUserInfo();
+  profileNameInput.value = currentInfo.name;
+  profileAboutInput.value = currentInfo.about;
   validationProfileForm.clearErrorsOnOpening();
   profilePopup.open();
 });
