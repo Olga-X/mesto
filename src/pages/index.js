@@ -4,6 +4,7 @@ import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
+//import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.js';
 import UserInfo from "../scripts/components/UserInfo.js";
 import {config, 
   initialCards, 
@@ -15,6 +16,14 @@ import {config,
 
 const profileEditBtn = document.querySelector('.profile__button-edit');
 const cardAddBtn = document.querySelector('.profile__button-add');
+
+/*/const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-43/',
+  headers: {
+    authorization: 'fd597ad8-95e3-4b9d-9691-61d858c2f79f',
+    'Content-Type': 'application/json',
+  },
+});/*/
 
 // валидация
 const validationProfileForm = new FormValidator(config, profileForm);

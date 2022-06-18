@@ -3,7 +3,8 @@
   height: 24px;
   align-self: center;
   background-color: transparent;
-  background-image: url("../../../images/pen.png");
+  background-image: url("../../../images/Vector.svg");
+  background-size: 10px;
   background-position: center;
   background-repeat: no-repeat;
   border: solid 1px #FFFFFF;
