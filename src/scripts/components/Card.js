@@ -4,11 +4,17 @@ export default class Card {
   _imageReviewDesc = this._imagePopup.querySelector('.popup__description');
 
 
-constructor(data, templateSelector, handleCardClick) {
+constructor(data, userId, templateSelector, handleCardClick, handleDeleteClick, handleLikeClick) {
 	this._name = data.name;
 	this._link = data.link;
+  this._likes = data.likes;
+  this._cardId = data._id;
+  this._userId = userId;
+  this._ownerId = data.owner._id;
 	this._templateSelector = templateSelector;
   this._handleCardClick = handleCardClick;
+  this._handleLikeClick = handleLikeClick;
+  this._handleDeleteClick = handleDeleteClick;
 }
 
  _getElement() {
@@ -21,9 +27,23 @@ constructor(data, templateSelector, handleCardClick) {
   return cardElement;
 }
 
+isLiked() {
+  return this._likes.some(item => item._id === this._userId);
+}
+
 //метод like карточки
 _toggleLike() {
   this._cardElementLike.classList.toggle('еlement__like_active');
+}
+
+setLikes(setNewLike) {
+  this._likes = setNewLike;
+  this._likesCounter.textContent = this._likes.length;
+  if (this.isLiked()) {
+    this._enableLike();
+  } else {
+    this._disableLike();
+  }
 }
 
 // удаление карточки 

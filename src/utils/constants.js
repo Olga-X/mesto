@@ -46,3 +46,4 @@ export const profileFormAvatar = document.querySelector('#editAvatarForm');
 
 export const cardsContainer = document.querySelector('.еlements__container');
 export const cardTemplate = document.querySelector('#card-template');
+export const avatar = document.querySelector('.profile__avatar');
