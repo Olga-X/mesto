@@ -34,7 +34,7 @@ validationProfileForm.enableValidation();
 const validationCardAddForm = new FormValidator(config, cardAddForm);
 validationCardAddForm.enableValidation();
 //const validationProfileAvatar = new FormValidator(config, profileFormAvatar);
-validationProfileAvatar.enableValidation();
+//validationProfileAvatar.enableValidation();
 
 // Класс для открытия попапа картинки
 const imagePopup  = new PopupWithImage({
