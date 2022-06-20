@@ -1,24 +1,22 @@
 export default class Api {
-  constructor({baseUrl, headers}) {
-    this._url = baseUrl;
-    this._headers = headers;
+  constructor(options) {
+    this._url = options.baseUrl;
+    this._headers = options.headers;
 }
 
 _checkResponse(res) {
   if (res.ok) {
       return res.json();
-  } else {
+  } 
       return Promise.reject(`Ошибка: ${res.status}`);
   }
-}
 
 
-getUserInfo() {
+getUser() {
   return fetch(`${this._url}/users/me`, {
-    method: 'GET',
-      headers: this._headers,
+    headers: this.headers
   })
-  .then(this._checkResponse);
+  .then(this._checkResponse)
 }
 
 
@@ -34,7 +32,10 @@ appendCard(data) {
   return fetch(`${this._url}/cards`, {
       method: POST,
       headers: this._headers,
-      body: JSON.stringify(data),
+      body: JSON.stringify({ 
+        name: data.name,
+        link: data.link
+      }),
   })
   .then(this._checkResponse);
 }
@@ -77,7 +78,7 @@ addLike(id) {
   .then(this._checkResponse);
 }
 
-dislike(id) {
+deleteLike(id) {
   return fetch(`${this._url}cards/${id}/likes`, {
       method: 'DELETE',
       headers: this._headers,
@@ -94,6 +95,5 @@ setAvatar({avatar}) {
     })
   })
   .then(this._checkResponse)
-}
-
+ }
 }

@@ -4,7 +4,7 @@ import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
-//import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.js';
+import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.js';
 import UserInfo from "../scripts/components/UserInfo.js";
 import Api from '../scripts/components/Api.js';
 import {config, 
@@ -28,25 +28,18 @@ const api = new Api({
   },
 });
 
-// валидация
-const validationProfileForm = new FormValidator(config, profileForm);
-validationProfileForm.enableValidation();
-const validationCardAddForm = new FormValidator(config, cardAddForm);
-validationCardAddForm.enableValidation();
-//const validationProfileAvatar = new FormValidator(config, profileFormAvatar);
-//validationProfileAvatar.enableValidation();
+Promise.all([api.getUser(), api.getInitialCards()])
+  .then(([data, user]) => {
 
-// Класс для открытия попапа картинки
-const imagePopup  = new PopupWithImage({
-  popupSelector: '.pop up_review-image',
-});
 
+    });
+    
 // Функция создания карточки
 function createCard(data) {
   const card = new Card(data,  "#card-template", () => {
     imagePopup.open(data);
   }).generateCard();
-  return card
+  return card  
 } 
 
 // Отрисовка карточек
@@ -100,6 +93,22 @@ const popupAvatar = new PopupWithForm({
 const popupDelete = new PopupWithConfirmation({
   popupSelector: ".popup_delete",
 });
+
+
+// валидация
+const validationProfileForm = new FormValidator(config, profileForm);
+validationProfileForm.enableValidation();
+const validationCardAddForm = new FormValidator(config, cardAddForm);
+validationCardAddForm.enableValidation();
+//const validationProfileAvatar = new FormValidator(config, profileFormAvatar);
+//validationProfileAvatar.enableValidation();
+
+// Класс для открытия попапа картинки
+const imagePopup  = new PopupWithImage({
+  popupSelector: '.pop up_review-image',
+});
+
+
 
 // Слушатели
 imagePopup.setEventListeners();
