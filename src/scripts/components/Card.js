@@ -1,15 +1,12 @@
 export default class Card {
-  _imagePopup = document.querySelector('.popup_review-image');
-  _imageReview = this._imagePopup.querySelector('.popup__image');
-  _imageReviewDesc = this._imagePopup.querySelector('.popup__description');
 
-constructor(data, userId, templateSelector, handleCardClick, handleDeleteClick, handleLikeClick) {
+constructor({data, handleUserData, templateSelector, handleCardClick, handleDeleteClick, handleLikeClick}) {
 	this._name = data.name;
 	this._link = data.link;
   this._likes = data.likes;
-  this._cardId = data._id;
   this._ownerId = data.owner._id;
-  this._userId = userId;
+  //this._userId = userId;
+  this._handleUserData = handleUserData;
 	this._templateSelector = templateSelector;
   this._handleCardClick = handleCardClick;
   this._handleLikeClick = handleLikeClick;
@@ -44,24 +41,28 @@ removeLike(likes) {
 }
 
 // удаление карточки 
-_deleteCard() {
+_handleDelete()  {
   this.handleDeleteClick(this._element)
 }
 
 // слушатели событий
 _setEventListeners() {
    // событие открытия попапа
-   this._cardImage.addEventListener('click', () => {this._handleCardClick(this._name, this._link)});
+   this._cardImage.addEventListener('click', () => {
+    this._handleCardClick(this._name, this._link)
+  });
 
   // событие лайка
   this._cardElementLike = this._element.querySelector('.еlement__like');
-  this._cardElementLike.addEventListener('click',  () => {
+  this._cardElementLike.addEventListener('click', () => {
   this._handleLikeClick();
   }); 
 
   // событие удаления карточки
-  this._cardElementTrash = this._element.querySelector('.element__btn-trash')
-  this._cardElementTrash.addEventListener('click', () =>{this._deleteCard()});
+  this._cardElementTrash = this._element.querySelector('.element__btn-trash');
+  this._cardElementTrash.addEventListener('click', () =>{
+    this._handleDelete()
+  });
 };
 
 generateCard() {
@@ -75,17 +76,19 @@ generateCard() {
 
   this._setEventListeners();
 
-  if (this._userId._id === this._ownerId) {
+ 
+  if (this._handleUserData._id === this._ownerId) {
     this._cardElementTrash.classList.add('element__btn-trash_visible');
   }
 
-  if (this._likes.some(item => item._id === this._userId._id)) {
+  if (this._likes.some(item => item._id === this._handleUserData._id)) {
     this._isLiked = true;
     this._cardElementLike.classList.add('еlement__like_active');
   } else {
     this._isLiked = false;
   }
 
+
   return this._element;
-  }
+  };
 }

@@ -31,8 +31,6 @@ const api = new Api({
 Promise.all([api.getUser(), api.getInitialCards()])
   .then(([userData, cardInfo]) => {
 
-    
-// Функция создания карточки
 function createCard(item) {
   const cardElement = new Card({templateSelector: "#card-template", data: item,
   handleCardClick:  () => {
@@ -72,22 +70,20 @@ function createCard(item) {
         })
     }
   },
- userId:  userData
+  handleUserData: userData
 }) 
   return cardElement.generateCard();  
 } 
 
-
-
 /**
  *  Отрисовка карточек
  */
-const cardList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    cardList.appendCard(createCard(item ));
-  },
-}, '.еlements__container');
+ const cardList = new Section(
+  (item) => {
+    const cardElement = createCard(item);
+    cardList.addItem(cardElement);
+  }, '.еlements__container');
+
 cardList.renderItems(cardInfo);
 
 
@@ -99,7 +95,7 @@ popupDelete.setEventListeners();
 
 // Класс для открытия попапа картинки
 const imagePopup  = new PopupWithImage({
-  popupSelector: '.pop up_review-image',
+  popupSelector: '.popup_review-image',
 });
 imagePopup.setEventListeners();
 
@@ -108,9 +104,9 @@ imagePopup.setEventListeners();
   */
 const cardPopup = new PopupWithForm({
   popupSelector: '.popup_form_add-card', 
-  handleFormSubmit: (item) => {
+  handleFormSubmit: (data) => {
   cardPopup.renderBtnText('Создание');
-  api.setCard({
+  api.addCard({
     name: data.name,
     link: data.link
   })
@@ -185,9 +181,6 @@ const validationCardAddForm = new FormValidator(config, cardAddForm);
 validationCardAddForm.enableValidation();
 const validationProfileAvatar = new FormValidator(config, profileFormAvatar);
 validationProfileAvatar.enableValidation();
-
-
-
 
 // Открывает-закрывает профиль
 profileEditBtn.addEventListener('click', () => {
