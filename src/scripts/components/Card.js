@@ -4,6 +4,7 @@ export default class Card {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
+    this._cardId = data._id;
     this._ownerId = data.owner._id;
     this._processUserData = processUserData;
     this._templateSelector = templateSelector;

@@ -7,8 +7,7 @@ import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.js';
 import UserInfo from "../scripts/components/UserInfo.js";
 import Api from '../scripts/components/Api.js';
-import {config, 
-  initialCards, 
+import {config,  
   profileForm,
   cardAddForm,
   profileFormAvatar,
