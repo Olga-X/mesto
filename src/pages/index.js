@@ -20,8 +20,9 @@ const profileEditBtn = document.querySelector('.profile__button-edit');
 const cardAddBtn = document.querySelector('.profile__button-add');
 const avatarAddBtn = document.querySelector(".profile__avatar-btn");
 
+
 const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-43/',
+  url: 'https://mesto.nomoreparties.co/v1/cohort-43', 
   headers: {
     authorization: 'fd597ad8-95e3-4b9d-9691-61d858c2f79f',
     'Content-Type': 'application/json',
@@ -29,20 +30,21 @@ const api = new Api({
 });
 
 Promise.all([api.getUser(), api.getInitialCards()])
-  .then(([userData, cardInfo]) => {
+  .then(([userData, cardData]) => {
 
 function createCard(item) {
   const cardElement = new Card({templateSelector: "#card-template", data: item,
   handleCardClick:  () => {
     imagePopup.open(item);
   },
-  handleDeleteClick: (elem) => {
+  handleDeleteClick: (element) => {
     popupDelete.open();
     popupDelete.setSubmitHandler(
       () => {
-        api.deleteCard(item._id)
-        .then(res => {
-          elem.remove();
+        api
+        .deleteCard(item._id)
+        .then(() => {
+          element.remove();
           popupDelete.close();
         })
         .catch((err) => {
@@ -70,7 +72,7 @@ function createCard(item) {
         })
     }
   },
-  handleUserData: userData
+  processUserData: userData
 }) 
   return cardElement.generateCard();  
 } 
@@ -84,8 +86,32 @@ function createCard(item) {
     cardList.addItem(cardElement);
   }, '.еlements__container');
 
-cardList.renderItems(cardInfo);
+cardList.renderItems(cardData);
 
+
+ /**
+  *  Класс создания картинки и формы 
+  */
+const cardPopup = new PopupWithForm({
+  popupSelector: '.popup_form_add-card', 
+  handleFormSubmit: (data) => {
+  cardPopup.renderBtnText('Создание');
+  api.setCard({
+    name: data.name,
+    link: data.link
+  })
+  .then(res => {
+    const cardElement = createCard(res);
+  cardList.addItem(cardElement);
+  cardPopup.close();
+})
+.catch((err) => {
+  console.log(err);
+})
+.finally(() =>  cardPopup.renderBtnText('Создать'))
+}
+});
+cardPopup.setEventListeners();
 
 // попап delete
 const popupDelete = new PopupWithConfirmation({
@@ -99,40 +125,16 @@ const imagePopup  = new PopupWithImage({
 });
 imagePopup.setEventListeners();
 
- /**
-  *  Класс создания картинки и формы 
-  */
-const cardPopup = new PopupWithForm({
-  popupSelector: '.popup_form_add-card', 
-  handleFormSubmit: (data) => {
-  cardPopup.renderBtnText('Создание');
-  api.addCard({
-    name: data.name,
-    link: data.link
-  })
-  .then(res => {
-    const cardElement = createCard(res);
-  cardList.prependCard(cardElement);
-  cardPopup.close();
-})
-.catch((err) => {
-  console.log(err);
-})
-.finally(() => popupPlace.renderButtonText('Создать'))
-}
-});
-cardPopup.setEventListeners();
-
 
 // Редактирование профиля
-
 const userInfo = new UserInfo({
   nameSelector: ".profile__title", 
   aboutSelector: ".profile__text",
   avatarSelector: ".profile__avatar"
 });
-const {nameProfile, aboutMe, avatar} = userData;
-  userInfo.setUserInfo({name: nameProfile, about: aboutMe, avatar: avatar});
+
+const {name, about, avatar} = userData;
+  userInfo.setUserInfo({name: name, about: about, avatar: avatar});
 
 const profilePopup = new PopupWithForm({
   popupSelector: ".popup_form_edit-profile", 
@@ -141,7 +143,7 @@ const profilePopup = new PopupWithForm({
   api.setUser({
     name: data.name,
     about: data.about
-    })
+  })
     .then(res => {
       userInfo.setUserInfo(res);
       profilePopup.close();
@@ -163,7 +165,7 @@ const popupAvatar = new PopupWithForm({
       avatar: data.avatar
     })
     .then(res => { 
-      userInfo.setAvatar(res.avatar);
+      userInfo.setAvatar(res);
       popupAvatar.close();
     })
     .catch((err) => {
@@ -177,8 +179,10 @@ const popupAvatar = new PopupWithForm({
 // валидация
 const validationProfileForm = new FormValidator(config, profileForm);
 validationProfileForm.enableValidation();
+
 const validationCardAddForm = new FormValidator(config, cardAddForm);
 validationCardAddForm.enableValidation();
+
 const validationProfileAvatar = new FormValidator(config, profileFormAvatar);
 validationProfileAvatar.enableValidation();
 
@@ -201,9 +205,5 @@ cardAddBtn.addEventListener("click", () => {
 avatarAddBtn.addEventListener("click", () => {
   popupAvatar.open();
   validationProfileAvatar.clearErrorsOnOpening();
-})
-
-.catch((err) => {
-  console.log(err);
 })
 })
