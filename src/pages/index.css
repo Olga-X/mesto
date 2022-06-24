@@ -19,7 +19,7 @@
 @import url(../blocks/еlement/__title/еlement__title.css);
 @import url(../blocks/еlement/__likes/element__likes.css);
 @import url(../blocks/еlement/__like-counter/еlement__like-counter.css);
-@import url(../blocks/еlement/__like/еlement__like.css); 
+@import url(../blocks/еlement/__like/еlement__like.css);
 @import url(../blocks/еlement/__btn-trash/element__btn-trash.css);
 @import url(../blocks/еlement/__btn-trash/_visible/element__btn-trash_visible.css);
 @import url(../blocks/еlement/__like/_active/еlement__like_active.css);
