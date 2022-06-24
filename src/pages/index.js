@@ -27,8 +27,19 @@ const api = new Api({
   },
 });
 
+let userId;
+
 Promise.all([api.getUser(), api.getInitialCards()])
   .then(([userData, cardData]) => {
+  const {name, about, avatar} = userData;
+  userInfo.setUserInfo({name: name, about: about, avatar: avatar});
+  userId = userData._id;
+
+  cardList.renderItems(cardData, userData._id);
+  })
+  .catch((err) => {
+    console.log(err);
+});
 
 function createCard(item) {
   const cardElement = new Card({templateSelector: "#card-template", data: item,
@@ -51,8 +62,8 @@ function createCard(item) {
       }
     )
   },
-  handleLikeClick:() => {
-    if (cardElement._isLiked) {
+  handleLikeClick:(isLiked) => {
+    if (isLiked) {
       api.deleteLike(item._id)
       .then(res => {
         cardElement.removeLike(res.likes)
@@ -70,7 +81,7 @@ function createCard(item) {
         })
     }
   },
-  processUserData: userData
+  processUserData: userId
 }) 
   return cardElement.generateCard();  
 } 
@@ -83,14 +94,13 @@ function createCard(item) {
     cardList.addCard(cardElement);
   }, '.еlements__container');
 
-cardList.renderItems(cardData);
 
 // Класс создания картинки и формы 
 
 const cardPopup = new PopupWithForm({
   popupSelector: '.popup_form_add-card', 
   handleFormSubmit: (data) => {
-  cardPopup.renderBtnText('Создание');
+  cardPopup.renderBtnText('Создать');
   api.setCard({
     name: data.name,
     link: data.link
@@ -127,13 +137,11 @@ const userInfo = new UserInfo({
   avatarSelector: ".profile__avatar"
 });
 
-const {name, about, avatar} = userData;
-  userInfo.setUserInfo({name: name, about: about, avatar: avatar});
 
 const profilePopup = new PopupWithForm({
   popupSelector: ".popup_form_edit-profile", 
   handleFormSubmit: (data) => {
-  profilePopup.renderBtnText('Сохранение');
+  profilePopup.renderBtnText('Сохранение...');
   api.setUser({
     name: data.name,
     about: data.about
@@ -198,5 +206,4 @@ cardAddBtn.addEventListener("click", () => {
 avatarAddBtn.addEventListener("click", () => {
   popupAvatar.open();
   validationProfileAvatar.clearErrorsOnOpening();
-})
 })

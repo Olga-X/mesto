@@ -17,7 +17,7 @@ export default class Popup {
 
   _handleEscClose(evt) {
       if (evt.key === 'Escape') {
-        this._popup.classList.remove("popup_opened");
+        this._popup.classList.remove(this.close());
       }
   }
 
@@ -34,6 +34,5 @@ export default class Popup {
 
     this._popup
     .addEventListener('mousedown', (event) => this._handleOverlayClose(event));
-    
   }
 }

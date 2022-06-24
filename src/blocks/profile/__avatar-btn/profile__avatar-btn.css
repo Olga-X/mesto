@@ -13,6 +13,7 @@
   background-position: center;
   transition: opacity .2s linear;
   position: absolute;
+  cursor: pointer;
 }
 
 .profile__avatar-btn:hover {

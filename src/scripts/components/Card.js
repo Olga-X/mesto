@@ -49,7 +49,7 @@ export default class Card {
     // событие лайка
     this._cardElementLike = this._element.querySelector('.еlement__like');
     this._cardElementLike.addEventListener('click', () => {
-    this._handleLikeClick()
+    this._handleLikeClick(this._isLiked)
     }); 
   
     // событие удаления карточки
