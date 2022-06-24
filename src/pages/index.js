@@ -31,10 +31,8 @@ let userId;
 
 Promise.all([api.getUser(), api.getInitialCards()])
   .then(([userData, cardData]) => {
-  const {name, about, avatar} = userData;
-  userInfo.setUserInfo({name: name, about: about, avatar: avatar});
+  userInfo.setUserInfo(userData);
   userId = userData._id;
-
   cardList.renderItems(cardData, userData._id);
   })
   .catch((err) => {
@@ -42,7 +40,7 @@ Promise.all([api.getUser(), api.getInitialCards()])
 });
 
 function createCard(item) {
-  const cardElement = new Card({templateSelector: "#card-template", data: item,
+  const cardElement = new Card({templateSelector: "#card-template", data: item, userId: userId,
   handleCardClick:  () => {
     imagePopup.open(item);
   },
@@ -81,7 +79,7 @@ function createCard(item) {
         })
     }
   },
-  processUserData: userId
+   userId
 }) 
   return cardElement.generateCard();  
 } 
@@ -119,6 +117,7 @@ const cardPopup = new PopupWithForm({
 cardPopup.setEventListeners();
 
 // Попап delete
+
 const popupDelete = new PopupWithConfirmation({
   popupSelector: ".popup_delete",
 });
@@ -131,12 +130,12 @@ const imagePopup  = new PopupWithImage({
 imagePopup.setEventListeners();
 
 // Редактирование профиля
+
 const userInfo = new UserInfo({
   nameSelector: ".profile__title", 
   aboutSelector: ".profile__text",
   avatarSelector: ".profile__avatar"
 });
-
 
 const profilePopup = new PopupWithForm({
   popupSelector: ".popup_form_edit-profile", 
@@ -161,7 +160,7 @@ const profilePopup = new PopupWithForm({
 const popupAvatar = new PopupWithForm({
   popupSelector: ".popup_avatar", 
   handleFormSubmit: (data) => {
-    popupAvatar.renderBtnText('Сохранение');
+    popupAvatar.renderBtnText('Сохранение...');
     api.setAvatar({
       avatar: data.avatar
     })
@@ -177,7 +176,8 @@ const popupAvatar = new PopupWithForm({
   });
   popupAvatar.setEventListeners();
 
-// валидация
+// Валидация
+
 const validationProfileForm = new FormValidator(config, profileForm);
 validationProfileForm.enableValidation();
 
@@ -188,6 +188,7 @@ const validationProfileAvatar = new FormValidator(config, profileFormAvatar);
 validationProfileAvatar.enableValidation();
 
 // Открывает попап профиль
+
 profileEditBtn.addEventListener('click', () => {
   const currentInfo = userInfo.getUserInfo();
   profileNameInput.value = currentInfo.name;
@@ -197,12 +198,14 @@ profileEditBtn.addEventListener('click', () => {
 });
   
 //Открыть попап карточки
+
 cardAddBtn.addEventListener("click", () => {
   cardPopup.open();
   validationCardAddForm.clearErrorsOnOpening();
 });
 
 //Открыть попап аватар
+
 avatarAddBtn.addEventListener("click", () => {
   popupAvatar.open();
   validationProfileAvatar.clearErrorsOnOpening();
