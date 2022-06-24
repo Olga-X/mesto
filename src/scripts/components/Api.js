@@ -24,7 +24,6 @@ setUser(data) {
   .then(this._checkResponse)
 }
 
-
 getUser() {
   return fetch(`${this._url}/users/me`, {
       method: 'GET',
@@ -43,7 +42,6 @@ getUser() {
     })
     .then(this._checkResponse)
   }
-
 
 getInitialCards() {
   return fetch(`${this._url}/cards`, {
@@ -65,7 +63,6 @@ setCard(data) {
   .then(this._checkResponse)
 }
 
-
 deleteCard(id) {
   return fetch(`${this._url}/cards/${id}`, {
     method: 'DELETE',
@@ -73,7 +70,6 @@ deleteCard(id) {
   })
   .then(this._checkResponse)
 }
-
 
 setLike(id) {
   return fetch(`${this._url}/cards/${id}/likes`, {

@@ -6,25 +6,8 @@
   font-size: 14px;
   line-height: 17px;
   padding: 0 0 8px 0;
-  margin:  0 0 30px 0;
+  margin: 17px 0 0  0;
   border: none;
   color: #000;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
-}
-
-@media screen and (max-width: 320px) {
-  .form__input:last-of-type {
-      margin: 0 0 45px 0;
-  }
-}
-.form__input:focus {
-  outline: none;
-  border-bottom: 1px solid black;
-}
-
-.form__input::placeholder {
-  font-family: "Inter", "Arial", sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
 }

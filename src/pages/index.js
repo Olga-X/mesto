@@ -19,7 +19,6 @@ const profileEditBtn = document.querySelector('.profile__button-edit');
 const cardAddBtn = document.querySelector('.profile__button-add');
 const avatarAddBtn = document.querySelector(".profile__avatar-btn");
 
-
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-43', 
   headers: {
@@ -76,21 +75,18 @@ function createCard(item) {
   return cardElement.generateCard();  
 } 
 
-/**
- *  Отрисовка карточек
- */
+// Отрисовка карточек
+
  const cardList = new Section(
   (item) => {
     const cardElement = createCard(item);
-    cardList.addItem(cardElement);
+    cardList.addCard(cardElement);
   }, '.еlements__container');
 
 cardList.renderItems(cardData);
 
+// Класс создания картинки и формы 
 
- /**
-  *  Класс создания картинки и формы 
-  */
 const cardPopup = new PopupWithForm({
   popupSelector: '.popup_form_add-card', 
   handleFormSubmit: (data) => {
@@ -101,7 +97,7 @@ const cardPopup = new PopupWithForm({
   })
   .then(res => {
     const cardElement = createCard(res);
-  cardList.addItem(cardElement);
+  cardList.addCard(cardElement);
   cardPopup.close();
 })
 .catch((err) => {
@@ -112,7 +108,7 @@ const cardPopup = new PopupWithForm({
 });
 cardPopup.setEventListeners();
 
-// попап delete
+// Попап delete
 const popupDelete = new PopupWithConfirmation({
   popupSelector: ".popup_delete",
 });
@@ -123,7 +119,6 @@ const imagePopup  = new PopupWithImage({
   popupSelector: '.popup_review-image',
 });
 imagePopup.setEventListeners();
-
 
 // Редактирование профиля
 const userInfo = new UserInfo({
@@ -155,7 +150,6 @@ const profilePopup = new PopupWithForm({
   });
   profilePopup.setEventListeners();
 
-
 const popupAvatar = new PopupWithForm({
   popupSelector: ".popup_avatar", 
   handleFormSubmit: (data) => {
@@ -185,7 +179,7 @@ validationCardAddForm.enableValidation();
 const validationProfileAvatar = new FormValidator(config, profileFormAvatar);
 validationProfileAvatar.enableValidation();
 
-// Открывает-закрывает профиль
+// Открывает попап профиль
 profileEditBtn.addEventListener('click', () => {
   const currentInfo = userInfo.getUserInfo();
   profileNameInput.value = currentInfo.name;

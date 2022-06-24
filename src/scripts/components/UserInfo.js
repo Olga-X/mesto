@@ -9,7 +9,6 @@ export default class UserInfo {
     const data={};
         data.name = this._name.textContent;
         data.about = this._about.textContent;
-
         return data;
   }
 
@@ -22,5 +21,4 @@ export default class UserInfo {
   setAvatar({avatar}) {
     this._avatar.src = avatar;
   }
-
 }

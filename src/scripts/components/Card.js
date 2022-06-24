@@ -1,10 +1,8 @@
 export default class Card {
-
   constructor({data, templateSelector, processUserData, handleCardClick, handleDeleteClick, handleLikeClick}) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
-    this._cardId = data._id;
     this._ownerId = data.owner._id;
     this._processUserData = processUserData;
     this._templateSelector = templateSelector;
@@ -36,7 +34,6 @@ export default class Card {
     this._element.querySelector('.еlement__like-counter').textContent = likes.length;
   }
   
-
   // удаление карточки 
   _handleDelete()  {
     this._handleDeleteClick(this._element)
@@ -71,10 +68,8 @@ export default class Card {
 
     this._element.querySelector('.еlement__title').textContent = this._name;
     this._element.querySelector('.еlement__like-counter').textContent = this._likes.length;
-  
     this._setEventListeners();
   
-   
     if (this._processUserData._id === this._ownerId) {
       this._cardElementTrash.classList.add('element__btn-trash_visible');
     }
