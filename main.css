@@ -668,11 +668,14 @@ position: relative;
   padding: 0;
   background-size: cover;
   border: none;
-
+  visibility: hidden;
 }
 
 .element__btn-trash:hover {
   opacity: .6;
+}
+.element__btn-trash_visible {
+  visibility: visible;
 }
 .еlement__like_active {
   background-image: url(fe17a515669479b1e649.svg);
@@ -809,19 +812,20 @@ position: relative;
   }
 }
 .popup__title {
-margin: 0 0 54px 0;
+padding: 0 0 47px 0;
 font-style: normal;
 font-weight: 900;
 font-size: 24px;
-line-height: 29px;
+line-height: 1.21;
 color: #000000;
+margin: 0;
 }
 
 @media screen and (max-width: 420px) {
   .popup__title {
     font-size: 18px;
     line-height: 22px;
-    margin: 0 0 75px 0;
+    padding: 0 0 75px 0;
   }
 }
 .popup__close-image {
@@ -862,20 +866,14 @@ display: block;
   font-size: 14px;
   line-height: 17px;
   padding: 0 0 8px 0;
-  margin:  0 0 30px 0;
+  margin: 17px 0 0  0;
   border: none;
   color: #000;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
-
-@media screen and (max-width: 320px) {
-  .form__input:last-of-type {
-      margin: 0 0 45px 0;
-  }
-}
-
 .form__input_type_error {
   border-bottom: 1px solid rgb(255, 0, 0);
+
 }
 .form__submit {
   width: 100%;
@@ -890,7 +888,7 @@ display: block;
   border: none;
   border-radius: 2px;
   cursor: pointer;
-  margin-top: 18px;
+  margin-top: 38px;
 }
 
 .form__submit:hover {
@@ -922,23 +920,6 @@ display: block;
   color: #ff0000;
   position: absolute;
   text-align: start;
-  top: 148px;
-}
-
-@media screen and (max-width: 420px) {
-  .form__error {
-    top: 156px;
- }
-}
-
-.form__error:last-of-type {
-  top: 209px;
-}
-
-@media screen and (max-width: 420px) {
-  .form__error:last-of-type {
-    top: 210px;
- }
 }
 .form__error_visible {
   visibility: visible;
