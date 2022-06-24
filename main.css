@@ -470,6 +470,7 @@ template {
   width: 24px;
   height: 24px;
   align-self: center;
+  cursor: pointer;
   background-color: transparent;
   background-image: url(a086f758840ae814ecde.svg);
   background-size: 10px;
@@ -478,7 +479,6 @@ template {
   border: solid 1px #FFFFFF;
   padding: 3px 0 0 0;
   line-height: 0;
-  cursor: pointer;
 }
 
 .profile__button-edit:hover {
@@ -507,6 +507,7 @@ template {
   background-position: center;
   transition: opacity .2s linear;
   position: absolute;
+  cursor: pointer;
 }
 
 .profile__avatar-btn:hover {
@@ -636,12 +637,6 @@ position: relative;
     align-items: center;
     justify-content: space-between;
 }
-.еlement__like-counter {
-  font-size: 13px;
-  margin-top: 5px;
-  color: #000;
-  font-weight: 400;
-}
 .еlement__like {
   width: 22px;
   height: 19px;
@@ -654,6 +649,12 @@ position: relative;
 
 .еlement__like:hover {
   opacity: .5;
+}
+.еlement__like-counter {
+  font-size: 13px;
+  margin-top: 5px;
+  color: #000;
+  font-weight: 400;
 }
 .element__btn-trash {
   top: 20px;
@@ -812,7 +813,7 @@ position: relative;
   }
 }
 .popup__title {
-padding: 0 0 47px 0;
+padding: 0 0 24px 0;
 font-style: normal;
 font-weight: 900;
 font-size: 24px;
@@ -825,7 +826,7 @@ margin: 0;
   .popup__title {
     font-size: 18px;
     line-height: 22px;
-    padding: 0 0 75px 0;
+    padding: 0 0 24px 0;
   }
 }
 .popup__close-image {
@@ -860,13 +861,14 @@ display: block;
 
 .form__input {
   width: 100%;
+  max-height: 330px;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  padding: 0 0 8px 0;
-  margin: 17px 0 0  0;
+  padding: 0 0 7px 0;
+  margin: 30px 0 0  0;
   border: none;
   color: #000;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
@@ -888,7 +890,7 @@ display: block;
   border: none;
   border-radius: 2px;
   cursor: pointer;
-  margin-top: 38px;
+  margin-top: 40px;
 }
 
 .form__submit:hover {
