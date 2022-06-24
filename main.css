@@ -813,7 +813,7 @@ position: relative;
   }
 }
 .popup__title {
-padding: 0 0 24px 0;
+padding: 0 0 20px 0;
 font-style: normal;
 font-weight: 900;
 font-size: 24px;
@@ -868,7 +868,7 @@ display: block;
   font-size: 14px;
   line-height: 17px;
   padding: 0 0 7px 0;
-  margin: 30px 0 0  0;
+  margin: 35px 0 0 0;
   border: none;
   color: #000;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
@@ -890,7 +890,7 @@ display: block;
   border: none;
   border-radius: 2px;
   cursor: pointer;
-  margin-top: 40px;
+  margin-top: 43px;
 }
 
 .form__submit:hover {
@@ -922,6 +922,7 @@ display: block;
   color: #ff0000;
   position: absolute;
   text-align: start;
+  margin-top: 5px;
 }
 .form__error_visible {
   visibility: visible;
